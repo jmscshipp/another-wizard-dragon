@@ -22,10 +22,11 @@ public class EnemyWaveManager : MonoBehaviour
     void Update()
     {
         // splits a 2 min period into 10 segments, and sends a wave every segment
-        if (Time.timeSinceLevelLoad / 30f > timeIncrement)
+        if (Time.timeSinceLevelLoad / 60f > timeIncrement)
         {
+            Debug.Log("SENDING WAVE");
             timeIncrement += 0.1f;
-            StartCoroutine(SendWave(Mathf.RoundToInt(waves.Evaluate(timeIncrement) * 10f)));
+            StartCoroutine(SendWave(Mathf.RoundToInt(waves.Evaluate(timeIncrement) * 2f)));
             Debug.Log(Time.timeSinceLevelLoad + " : " + waves.Evaluate(timeIncrement) + " : sending wave with " + Mathf.RoundToInt(waves.Evaluate(timeIncrement) * 10f) + " enemies");
         }
     }
@@ -42,8 +43,8 @@ public class EnemyWaveManager : MonoBehaviour
     private GameObject PickRandomEnemy()
     {
         // first 20% of game only spawns normal enemies
-        if (timeIncrement < 2f)
-            return normalEnemyPrefab;
+        //if (timeIncrement < 2f)
+        //    return normalEnemyPrefab;
 
         float num = Random.Range(0f, 1f);
         if (num < 0.3f)

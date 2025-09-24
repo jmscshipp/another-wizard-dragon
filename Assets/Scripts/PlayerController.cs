@@ -87,4 +87,9 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+    private void EnterDragonMode()
+    {
+
+    }
 }

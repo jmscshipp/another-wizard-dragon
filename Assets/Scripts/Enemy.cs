@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private GameObject enemyProjectilePrefab;
     [SerializeField]
-    private GameObject highlight;
+    private GameObject outline;
     private int health;
     private NavMeshAgent navAgent;
     private EnemyGoal goal;
@@ -94,7 +94,10 @@ public class Enemy : MonoBehaviour
 
     private void SetHighlight(bool activated)
     {
-        highlight.SetActive(activated);
+        if (activated)
+            outline.GetComponent<SpriteRenderer>().color = Color.white;
+        else
+            outline.GetComponent<SpriteRenderer>().color = Color.black;
     }
 
     private IEnumerator Attack()

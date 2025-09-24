@@ -10,8 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 51902614254998383}
   - component: {fileID: 3218615915640202762}
-  - component: {fileID: 1707014538638736491}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: ArcAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,22 +54,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &1707014538638736491
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 677391758611940962}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.14
 --- !u!1 &4573507368011868511
 GameObject:
   m_ObjectHideFlags: 0
@@ -82,7 +65,7 @@ GameObject:
   - component: {fileID: 2943616055665438548}
   - component: {fileID: 1168221808383503351}
   - component: {fileID: 5488383944581091944}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
