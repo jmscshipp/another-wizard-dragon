@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private GameObject arcAttackPrefab;
     private bool arcAttacking = false;
     private SpriteRenderer sprite;
+    private MouseInfo mouseInfo;
 
     private void Awake()
     {
@@ -28,6 +29,7 @@ public class PlayerController : MonoBehaviour
         fireAction.performed += ctx => ReceiveFireInput();
 
         rb = GetComponent<Rigidbody2D>();
+        mouseInfo = GetComponent<MouseInfo>();
         sprite = GetComponentInChildren<SpriteRenderer>();
     }
 
@@ -63,7 +65,7 @@ public class PlayerController : MonoBehaviour
 
     private void ReceiveFireInput()
     {
-        Enemy enemy = MouseInfo.Instance().MouseOverEnemy();
+        Enemy enemy = mouseInfo.MouseOverEnemy();
         if (enemy != null && !arcAttacking)
         {
             StartCoroutine(ArcAttack(enemy));

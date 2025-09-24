@@ -26,6 +26,7 @@ public class Enemy : MonoBehaviour
     {
         navAgent = GetComponent<NavMeshAgent>();
         healthbarUI = GetComponentInChildren<HealthbarUI>();
+        healthbarUI.gameObject.SetActive(false);
     }
 
     // Start is called before the first frame update
@@ -70,6 +71,7 @@ public class Enemy : MonoBehaviour
     public void TakeHit()
     {
         health--;
+        healthbarUI.gameObject.SetActive(true);
         healthbarUI.ChangeHealth(-1);
         if (health <= 0)
             Die();
@@ -80,15 +82,13 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnMouseOver()
+    public void MouseHover()
     {
-        MouseInfo.Instance().UpdateCurrentEnemy(this);
         SetHighlight(true);
     }
 
-    private void OnMouseExit()
+    public void MouserHoverLeave()
     {
-        MouseInfo.Instance().UpdateCurrentEnemy(null);
         SetHighlight(false);
     }
 

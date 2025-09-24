@@ -4,21 +4,37 @@ using UnityEngine;
 
 public class MouseInfo : MonoBehaviour
 {
+    [SerializeField]
     private Enemy currentEnemy;
 
-    private static MouseInfo instance;
+    [SerializeField]
+    private LayerMask clickableLayers;
 
-    private void Awake()
+    private void Update()
     {
-        if (instance != null && instance != this)
-            Destroy(this);
-        else
-            instance = this;
-    }
+        Vector2 ray = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        RaycastHit2D hit = Physics2D.Raycast(ray, Vector3.forward, Mathf.Infinity, clickableLayers);
+        Debug.DrawRay(ray, Vector3.forward * 100f, Color.red);
+        if (hit)
+        {
+            // new object hovered over
+            if (currentEnemy == null || (hit.collider.gameObject != currentEnemy.gameObject))
+            {
+                if (currentEnemy != null)
+                {
+                    currentEnemy.MouserHoverLeave();
+                }
 
-    public static MouseInfo Instance()
-    {
-        return instance;
+                currentEnemy = hit.collider.gameObject.GetComponent<Enemy>();
+                currentEnemy.MouseHover();
+            }
+        }
+        // left the previously hovered over object
+        else if (currentEnemy != null)
+        {
+            currentEnemy.MouserHoverLeave();
+            currentEnemy = null;
+        }
     }
 
     // called by enemy when mouse is over it
