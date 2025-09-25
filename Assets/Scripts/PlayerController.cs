@@ -18,6 +18,13 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer sprite;
     private MouseInfo mouseInfo;
 
+    // dragon mode
+    [SerializeField]
+    private GameObject dragonHead;
+    [SerializeField]
+    private GameObject dragonBody;
+    private bool inDragonMode = false;
+
     private void Awake()
     {
         // set up input actions
@@ -45,6 +52,17 @@ public class PlayerController : MonoBehaviour
         playerInputActions.Player.Disable();
         moveAction.Disable();
         fireAction.Disable();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+                    {
+            if (inDragonMode)
+                ExitDragonMode();
+            else
+                EnterDragonMode();
+        }
     }
 
     private void FixedUpdate()
@@ -92,6 +110,17 @@ public class PlayerController : MonoBehaviour
 
     private void EnterDragonMode()
     {
+        inDragonMode = true;
+        GetComponent<CircleCollider2D>().enabled = false;
+        dragonHead.SetActive(true);
+        dragonBody.SetActive(true);
+    }
 
+    private void ExitDragonMode()
+    {
+        GetComponent<CircleCollider2D>().enabled = true;
+        dragonHead.SetActive(false);
+        dragonBody.SetActive(false);
+        inDragonMode = false;
     }
 }
