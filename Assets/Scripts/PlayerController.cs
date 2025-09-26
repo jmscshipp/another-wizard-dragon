@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     private InputAction fireAction;
     private Rigidbody2D rb;
     private Vector2 moveInput;
-    [SerializeField]
+    private Vector2 nonZeroMoveInput; // for use in dragon mode
     private float moveSpeed = 125;
     [SerializeField]
     private GameObject arcAttackPrefab;
@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
         fireAction = playerInputActions.Player.Fire;
         fireAction.performed += ctx => ReceiveFireInput();
 
+        moveSpeed = BalanceVariables.playerMoveSpeed;
         rb = GetComponent<Rigidbody2D>();
         mouseInfo = GetComponent<MouseInfo>();
         sprite = GetComponentInChildren<SpriteRenderer>();
@@ -57,7 +58,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
-                    {
+        {
             if (inDragonMode)
                 ExitDragonMode();
             else
@@ -71,6 +72,12 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = Vector2.zero;
         }
+        else if (inDragonMode)
+        {
+            rb.velocity = nonZeroMoveInput * moveSpeed * Time.fixedDeltaTime;
+            dragonHead.transform.rotation *= Quaternion.FromToRotation(-dragonHead.transform.right, 
+                Vector2.Lerp(-dragonHead.transform.right, nonZeroMoveInput, Time.deltaTime * 15f));
+        }
         else
         {
             rb.velocity = moveInput * moveSpeed * Time.fixedDeltaTime;
@@ -79,6 +86,8 @@ public class PlayerController : MonoBehaviour
     private void ReceiveMoveInput(Vector2 input)
     {
         moveInput = input;
+        if (input != Vector2.zero)
+            nonZeroMoveInput = input;
     }
 
     private void ReceiveFireInput()
@@ -95,7 +104,7 @@ public class PlayerController : MonoBehaviour
         arcAttacking = true;
         GameObject arcAttack = Instantiate(arcAttackPrefab, transform.position, Quaternion.identity);
 
-        while( arcAttacking)
+        while(arcAttacking)
         {
             yield return new WaitForSeconds(Time.deltaTime);
             arcAttack.transform.position = Vector2.MoveTowards(arcAttack.transform.position, enemy.transform.position, 10f * Time.deltaTime);
@@ -111,13 +120,16 @@ public class PlayerController : MonoBehaviour
     private void EnterDragonMode()
     {
         inDragonMode = true;
+        moveSpeed = BalanceVariables.dragonMoveSpeed;
         GetComponent<CircleCollider2D>().enabled = false;
         dragonHead.SetActive(true);
+        dragonBody.transform.position = transform.position;
         dragonBody.SetActive(true);
     }
 
     private void ExitDragonMode()
     {
+        moveSpeed = BalanceVariables.playerMoveSpeed;
         GetComponent<CircleCollider2D>().enabled = true;
         dragonHead.SetActive(false);
         dragonBody.SetActive(false);

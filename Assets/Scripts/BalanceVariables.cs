@@ -26,4 +26,7 @@ public class BalanceVariables : MonoBehaviour
     public static float dragonTurretAttackRate = 2f;
     public static float dragonTurretProjectileSpeed = 130f;
     public static float dragonProjectileLifetime = 1f;
+
+    public static float playerMoveSpeed = 125f;
+    public static float dragonMoveSpeed = 250f;
 }

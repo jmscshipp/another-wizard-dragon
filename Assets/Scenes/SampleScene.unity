@@ -354,12 +354,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 174590842}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.38, y: -0.67, z: 0}
+  m_LocalPosition: {x: 5.06, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6106078}
-  m_Father: {fileID: 1703997852}
+  m_Father: {fileID: 459558496}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!232 &174590846
@@ -380,7 +380,7 @@ DistanceJoint2D:
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 0
   m_Distance: 0.94000006
-  m_MaxDistanceOnly: 0
+  m_MaxDistanceOnly: 1
 --- !u!1 &186197304
 GameObject:
   m_ObjectHideFlags: 0
@@ -530,10 +530,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff486edbb34304a44828e11e7cbbad88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 125
   arcAttackPrefab: {fileID: 677391758611940962, guid: 508b421918dcf014587da20598d73244, type: 3}
   dragonHead: {fileID: 8192652913591356007}
-  dragonBody: {fileID: 1703997851}
+  dragonBody: {fileID: 459558493}
 --- !u!50 &205430863
 Rigidbody2D:
   serializedVersion: 4
@@ -554,7 +553,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &205430864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -786,12 +785,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 271220485}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.4, y: -0.67, z: 0}
+  m_LocalPosition: {x: 1.08, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1381542110}
-  m_Father: {fileID: 1703997852}
+  m_Father: {fileID: 459558496}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!232 &271220489
@@ -812,7 +811,7 @@ DistanceJoint2D:
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 0
   m_Distance: 1.08
-  m_MaxDistanceOnly: 0
+  m_MaxDistanceOnly: 1
 --- !u!1 &364612050
 GameObject:
   m_ObjectHideFlags: 0
@@ -860,12 +859,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 364612050}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.39, y: -0.67, z: 0}
+  m_LocalPosition: {x: 2.07, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1844409194}
-  m_Father: {fileID: 1703997852}
+  m_Father: {fileID: 459558496}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!232 &364612054
@@ -886,7 +885,7 @@ DistanceJoint2D:
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 0
   m_Distance: 0.99
-  m_MaxDistanceOnly: 0
+  m_MaxDistanceOnly: 1
 --- !u!1 &392555580
 GameObject:
   m_ObjectHideFlags: 0
@@ -944,12 +943,12 @@ GameObject:
   - component: {fileID: 459558494}
   - component: {fileID: 459558497}
   m_Layer: 0
-  m_Name: DragonSegment
+  m_Name: DragonBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &459558494
 Rigidbody2D:
   serializedVersion: 4
@@ -984,8 +983,13 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 218501732}
-  m_Father: {fileID: 1703997852}
-  m_RootOrder: 0
+  - {fileID: 271220488}
+  - {fileID: 364612053}
+  - {fileID: 1651767659}
+  - {fileID: 942981387}
+  - {fileID: 174590845}
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!232 &459558497
 DistanceJoint2D:
@@ -1005,7 +1009,7 @@ DistanceJoint2D:
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 0
   m_Distance: 0.8602325
-  m_MaxDistanceOnly: 0
+  m_MaxDistanceOnly: 1
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -35810,12 +35814,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 942981384}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.44, y: -0.67, z: 0}
+  m_LocalPosition: {x: 4.12, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 680137945}
-  m_Father: {fileID: 1703997852}
+  m_Father: {fileID: 459558496}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!232 &942981388
@@ -35836,7 +35840,7 @@ DistanceJoint2D:
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 0
   m_Distance: 1.0700002
-  m_MaxDistanceOnly: 0
+  m_MaxDistanceOnly: 1
 --- !u!1 &1056387972
 GameObject:
   m_ObjectHideFlags: 0
@@ -36350,12 +36354,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1651767656}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.37, y: -0.67, z: 0}
+  m_LocalPosition: {x: 3.05, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 186197305}
-  m_Father: {fileID: 1703997852}
+  m_Father: {fileID: 459558496}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!232 &1651767660
@@ -36376,7 +36380,7 @@ DistanceJoint2D:
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 0
   m_Distance: 0.9799999
-  m_MaxDistanceOnly: 0
+  m_MaxDistanceOnly: 1
 --- !u!1 &1693564052
 GameObject:
   m_ObjectHideFlags: 0
@@ -36451,43 +36455,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.37, y: 1}
   m_EdgeRadius: 0
---- !u!1 &1703997851
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1703997852}
-  m_Layer: 0
-  m_Name: DragonBody
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1703997852
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1703997851}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 459558496}
-  - {fileID: 271220488}
-  - {fileID: 364612053}
-  - {fileID: 1651767659}
-  - {fileID: 942981387}
-  - {fileID: 174590845}
-  m_Father: {fileID: 0}
-  m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1780292031
 GameObject:
   m_ObjectHideFlags: 0
