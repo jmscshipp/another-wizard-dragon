@@ -35,7 +35,7 @@ public class DragonProjectile : MonoBehaviour
 
     private IEnumerator Die()
     {
-        yield return new WaitForSeconds(BalanceVariables.dragonProjectileLifetime);
+        yield return new WaitForSeconds(BalanceVariables.dragonTurretProjectileLifetime);
         Destroy(gameObject);
     }
 

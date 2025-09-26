@@ -23,6 +23,10 @@ public class PlayerController : MonoBehaviour
     private GameObject dragonHead;
     [SerializeField]
     private GameObject dragonBody;
+    [SerializeField]
+    private GameObject dragonTurretPrefab;
+    [SerializeField]
+    private GameObject dragonProjectile;
     private bool inDragonMode = false;
 
     private void Awake()
@@ -64,6 +68,11 @@ public class PlayerController : MonoBehaviour
             else
                 EnterDragonMode();
         }
+
+        if (inDragonMode)
+        {
+
+        }
     }
 
     private void FixedUpdate()
@@ -76,7 +85,7 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = nonZeroMoveInput * moveSpeed * Time.fixedDeltaTime;
             dragonHead.transform.rotation *= Quaternion.FromToRotation(-dragonHead.transform.right, 
-                Vector2.Lerp(-dragonHead.transform.right, nonZeroMoveInput, Time.deltaTime * 15f));
+                Vector2.Lerp(-dragonHead.transform.right, nonZeroMoveInput, Time.fixedDeltaTime * 15f));
         }
         else
         {
@@ -117,6 +126,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private IEnumerator DragonAttack()
+    {
+        while (inDragonMode)
+        {
+            yield return new WaitForSeconds(0.1f);
+            Quaternion rot = dragonHead.transform.rotation * Quaternion.FromToRotation(dragonHead.transform.right, nonZeroMoveInput)
+                * Quaternion.Euler(0f,  0f, Random.Range(-20f, 20f));
+            DragonProjectile newProjectile = Instantiate(dragonProjectile, (Vector2)transform.position + nonZeroMoveInput, rot).GetComponent<DragonProjectile>();
+            newProjectile.SetSpeed(BalanceVariables.dragonProjectileSpeed);
+        }
+    }
+
     private void EnterDragonMode()
     {
         inDragonMode = true;
@@ -125,6 +146,7 @@ public class PlayerController : MonoBehaviour
         dragonHead.SetActive(true);
         dragonBody.transform.position = transform.position;
         dragonBody.SetActive(true);
+        StartCoroutine(DragonAttack());
     }
 
     private void ExitDragonMode()
@@ -134,5 +156,6 @@ public class PlayerController : MonoBehaviour
         dragonHead.SetActive(false);
         dragonBody.SetActive(false);
         inDragonMode = false;
+        Instantiate(dragonTurretPrefab, transform.position, Quaternion.identity);
     }
 }
