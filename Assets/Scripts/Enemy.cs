@@ -9,6 +9,11 @@ public class Enemy : MonoBehaviour
     private GameObject enemyProjectilePrefab;
     [SerializeField]
     private GameObject outline;
+    [SerializeField]
+    private Sprite whiteOutSprite;
+    [SerializeField]
+    private Sprite normalSprite;
+    private SpriteRenderer spriteRenderer;
     private int health;
     private NavMeshAgent navAgent;
     private EnemyGoal goal;
@@ -24,6 +29,7 @@ public class Enemy : MonoBehaviour
 
     private void Awake()
     {
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         navAgent = GetComponent<NavMeshAgent>();
         healthbarUI = GetComponentInChildren<HealthbarUI>();
         healthbarUI.gameObject.SetActive(false);
@@ -73,12 +79,14 @@ public class Enemy : MonoBehaviour
         health--;
         healthbarUI.gameObject.SetActive(true);
         healthbarUI.ChangeHealth(-1);
+        StartCoroutine(FlashWhite());
         if (health <= 0)
-            Die();
+            StartCoroutine(Die());
     }
 
-    private void Die()
+    private IEnumerator Die()
     {
+        yield return new WaitForSeconds(0.1f);
         Destroy(gameObject);
     }
 
@@ -98,6 +106,13 @@ public class Enemy : MonoBehaviour
             outline.GetComponent<SpriteRenderer>().color = Color.white;
         else
             outline.GetComponent<SpriteRenderer>().color = Color.black;
+    }
+    
+    private IEnumerator FlashWhite()
+    {
+        spriteRenderer.sprite = whiteOutSprite;
+        yield return new WaitForSeconds(0.1f);
+        spriteRenderer.sprite = normalSprite;
     }
 
     private IEnumerator Attack()

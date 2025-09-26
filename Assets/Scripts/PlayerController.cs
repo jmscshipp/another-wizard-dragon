@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
 
     // dragon mode
     [SerializeField]
+    private GameObject playerGraphics;
+    [SerializeField]
     private GameObject dragonHead;
     [SerializeField]
     private GameObject dragonBody;
@@ -90,6 +92,8 @@ public class PlayerController : MonoBehaviour
         else
         {
             rb.velocity = moveInput * moveSpeed * Time.fixedDeltaTime;
+            if (moveInput != Vector2.zero)
+                sprite.transform.localScale = new Vector3(-Mathf.Sign(moveInput.x), 1f, 1f);
         }
     }
     private void ReceiveMoveInput(Vector2 input)
@@ -143,6 +147,7 @@ public class PlayerController : MonoBehaviour
         inDragonMode = true;
         moveSpeed = BalanceVariables.dragonMoveSpeed;
         GetComponent<CircleCollider2D>().enabled = false;
+        playerGraphics.SetActive(false);
         dragonHead.SetActive(true);
         dragonBody.transform.position = transform.position;
         dragonBody.SetActive(true);
@@ -153,6 +158,7 @@ public class PlayerController : MonoBehaviour
     {
         moveSpeed = BalanceVariables.playerMoveSpeed;
         GetComponent<CircleCollider2D>().enabled = true;
+        playerGraphics.SetActive(true);
         dragonHead.SetActive(false);
         dragonBody.SetActive(false);
         inDragonMode = false;

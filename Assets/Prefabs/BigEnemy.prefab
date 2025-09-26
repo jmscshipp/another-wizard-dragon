@@ -267,6 +267,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyProjectilePrefab: {fileID: 141269083818275905, guid: 314723c8f676b75408a27e9e32c9a66a, type: 3}
   outline: {fileID: 3123084945665441099}
+  whiteOutSprite: {fileID: -1837755324, guid: 21d0c157fca603d4fbab494017ec2714, type: 3}
+  normalSprite: {fileID: -445743060, guid: 21d0c157fca603d4fbab494017ec2714, type: 3}
   type: 2
 --- !u!1001 &9129529703881668425
 PrefabInstance:
