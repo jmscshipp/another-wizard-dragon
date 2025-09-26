@@ -22,12 +22,29 @@ public class EnemyWaveManager : MonoBehaviour
     void Update()
     {
         // splits a 2 min period into 10 segments, and sends a wave every segment
-        if (Time.timeSinceLevelLoad / 60f > timeIncrement)
+        //if (Time.timeSinceLevelLoad / 60f > timeIncrement)
+        //{
+        //    Debug.Log("SENDING WAVE");
+        //    timeIncrement += 0.1f;
+        //    StartCoroutine(SendWave(Mathf.RoundToInt(waves.Evaluate(timeIncrement) * 2f)));
+        //    Debug.Log(Time.timeSinceLevelLoad + " : " + waves.Evaluate(timeIncrement) + " : sending wave with " + Mathf.RoundToInt(waves.Evaluate(timeIncrement) * 10f) + " enemies");
+        //}
+    }
+
+    public void StartWaves()
+    {
+        StartCoroutine(WaveLoop());
+    }
+
+    private IEnumerator WaveLoop()
+    {
+        while (true)
         {
-            Debug.Log("SENDING WAVE");
             timeIncrement += 0.1f;
             StartCoroutine(SendWave(Mathf.RoundToInt(waves.Evaluate(timeIncrement) * 2f)));
-            Debug.Log(Time.timeSinceLevelLoad + " : " + waves.Evaluate(timeIncrement) + " : sending wave with " + Mathf.RoundToInt(waves.Evaluate(timeIncrement) * 10f) + " enemies");
+            yield return new WaitForSeconds(Mathf.Clamp(timeIncrement*5f, 0f, 10f));
+            if (timeIncrement >= 1f)
+                timeIncrement = 0f;
         }
     }
 
@@ -43,13 +60,13 @@ public class EnemyWaveManager : MonoBehaviour
     private GameObject PickRandomEnemy()
     {
         // first 20% of game only spawns normal enemies
-        //if (timeIncrement < 2f)
-        //    return normalEnemyPrefab;
+        if (timeIncrement < 0.2f)
+            return normalEnemyPrefab;
 
         float num = Random.Range(0f, 1f);
         if (num < 0.3f)
             return normalEnemyPrefab;
-        else if (num < 0.6f)
+        else if (num < 0.8f)
             return fastEnemyPrefab;
         else
             return BigEnemyPrefab;

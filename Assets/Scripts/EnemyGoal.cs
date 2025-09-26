@@ -24,7 +24,11 @@ public class EnemyGoal : MonoBehaviour
         buildingHealth--;
         healthbarUI.ChangeHealth(-1);
         if (buildingHealth <= 0)
-            Die();
+        {
+            //Die(); real version
+            buildingHealth = 20;
+            healthbarUI.Setup(buildingHealth);
+        }
     }
 
     private void Die()
